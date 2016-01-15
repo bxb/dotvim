@@ -6,8 +6,14 @@ syntax enable
 colorscheme solarized
 set background=dark
 
+let python_highlight_all=1
 syntax on 
 filetype plugin on
+
+" code folding
+set foldmethod=indent
+set foldlevel=99
+nnoremap <space> za
 
 set autochdir
 let mapleader = ","
@@ -15,6 +21,8 @@ let g:mapleader = ","
 
 set tabstop=4
 set softtabstop=4
+set expandtab
+set autoindent
 set shiftwidth=4
 set expandtab
 set number
