@@ -11,9 +11,12 @@ syntax on
 filetype plugin on
 
 " code folding
-set foldmethod=indent
-set foldlevel=99
+autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
+autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
+" set foldmethod=indent
+" set foldlevel=99
 nnoremap <space> za
+set foldlevelstart=2
 
 set autochdir
 let mapleader = ","
@@ -34,6 +37,7 @@ set hlsearch
 set scrolloff=5
 set cursorline
 set clipboard=unnamed
+set backspace=indent,eol,start
 
 map <leader><space> :noh<CR>
 map <leader>j :bprev<CR>
@@ -51,6 +55,11 @@ imap <C-J> <ESC><C-J>
 imap <C-K> <ESC><C-K>
 imap <C-L> <ESC><C-L>
 
+" select pasted section
+nnoremap gp `[v`]
+nmap ( [m
+nmap ) ]m
+
 set laststatus=2
 set showtabline=2
 set noshowmode
@@ -62,7 +71,7 @@ inoremap jj <ESC>:w<CR>
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 0
-set wildignore+=*.o,*.hi
+set wildignore+=*.o,*.hi,*.pyc
 nnoremap <leader>p :CtrlPMixed<CR>
 au FocusLost * :wa
 
