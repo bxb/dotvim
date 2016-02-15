@@ -13,8 +13,6 @@ filetype plugin on
 " code folding
 autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
 autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
-" set foldmethod=indent
-" set foldlevel=99
 nnoremap <space> za
 set foldlevelstart=2
 
@@ -40,8 +38,6 @@ set clipboard=unnamed
 set backspace=indent,eol,start
 
 map <leader><space> :noh<CR>
-map <leader>j :bprev<CR>
-map <leader>k :bnext<CR>
 map <leader>, :bprev<CR>
 nnoremap .. :bnext<CR>
 nnoremap <leader>- <C-w>s<C-w>j
@@ -59,6 +55,9 @@ imap <C-L> <ESC><C-L>
 nnoremap gp `[v`]
 nmap ( [m
 nmap ) ]m
+nnoremap s :exec "normal i".nr2char(getchar())."\e"<CR>
+nnoremap S :exec "normal a".nr2char(getchar())."\e"<CR>
+
 
 set laststatus=2
 set showtabline=2
