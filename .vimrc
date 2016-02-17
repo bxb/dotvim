@@ -80,7 +80,7 @@ au FocusLost * :wa
 let g:jedi#usages_command = "<leader>z"
 let g:jedi#popup_on_dot = 0
 let g:jedi#popup_select_first = 0
-map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
+map <Leader>b Oimport pdb; pdb.set_trace() # BREAKPOINT<C-c>
 
 let g:slime_target = "tmux"
 
