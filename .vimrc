@@ -3,8 +3,8 @@ execute pathogen#infect()
 call pathogen#helptags()
 
 syntax enable
-colorscheme solarized
-set background=dark
+colorscheme wombat
+" set background=dark
 
 let python_highlight_all=1
 syntax on 
