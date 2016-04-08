@@ -3,11 +3,11 @@ execute pathogen#infect()
 call pathogen#helptags()
 
 syntax enable
-colorscheme wombat
-" set background=dark
+colorscheme solarized
+set background=dark
 
 let python_highlight_all=1
-syntax on 
+syntax on
 filetype plugin on
 
 " code folding
@@ -46,7 +46,7 @@ nnoremap <leader>w <C-w>q
 nnoremap <leader>x :bd<CR>
 nnoremap <leader>rv :so $MYVIMRC<CR>
 nnoremap <leader>ev :e $MYVIMRC<CR>
-imap <C-H> <ESC><C-H>
+imap <C-H> <ESC><C-
 imap <C-J> <ESC><C-J>
 imap <C-K> <ESC><C-K>
 imap <C-L> <ESC><C-L>
@@ -57,7 +57,10 @@ nmap ( [m
 nmap ) ]m
 nnoremap s :exec "normal i".nr2char(getchar())."\e"<CR>
 nnoremap S :exec "normal a".nr2char(getchar())."\e"<CR>
-
+inoremap jj <ESC>:w<CR>
+nnoremap <leader>t :%s/\s\+$//g<CR>:w<CR>
+nmap <C-R> V<C-C><C-C>j
+nmap <C-Y> :redo 
 
 set laststatus=2
 set showtabline=2
@@ -65,7 +68,6 @@ set noshowmode
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 
-inoremap jj <ESC>:w<CR>
 
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
@@ -75,8 +77,6 @@ nnoremap <leader>p :CtrlPMixed<CR>
 au FocusLost * :wa
 
 " Settings for jedi-vim
-" " cd ~/.vim/bundle
-" " git clone git://github.com/davidhalter/jedi-vim.git
 let g:jedi#usages_command = "<leader>z"
 let g:jedi#popup_on_dot = 0
 let g:jedi#popup_select_first = 0
@@ -84,3 +84,17 @@ map <Leader>b Oimport pdb; pdb.set_trace() # BREAKPOINT<C-c>
 
 let g:slime_target = "tmux"
 
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 0
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+let g:syntastic_python_checkers = ['pylint']
+let g:syntastic_python_pylint_post_args = '--msg-template="{path}:{line}:{column}:{C}: [{symbol} {msg_id}] {msg}"'
+let g:syntastic_mode_map = {
+    \ "mode": "passive"}
+nmap <leader>c :SyntasticCheck<CR>
+nmap <leader>v :SyntasticToggleMode<CR>
