@@ -31,3 +31,15 @@
 [submodule "bundle/fugative"]
 	path = bundle/fugative
 	url = https://github.com/tpope/vim-fugitive
+[submodule "bundle/SimpylFold"]
+	path = bundle/SimpylFold
+	url = https://github.com/tmhedberg/SimpylFold
+[submodule "bundle/auto-pairs"]
+	path = bundle/auto-pairs
+	url = https://github.com/jiangmiao/auto-pairs
+[submodule "bundle/wombat"]
+	path = bundle/wombat
+	url = https://github.com/vim-scripts/Wombat
+[submodule "bundle/vim-wombat-scheme"]
+	path = bundle/vim-wombat-scheme
+	url = https://github.com/sheerun/vim-wombat-scheme
