@@ -28,3 +28,6 @@
 [submodule "bundle/vim-tmux-navigator"]
 	path = bundle/vim-tmux-navigator
 	url = https://github.com/christoomey/vim-tmux-navigator
+[submodule "bundle/fugative"]
+	path = bundle/fugative
+	url = https://github.com/tpope/vim-fugitive
