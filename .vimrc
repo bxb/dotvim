@@ -45,7 +45,7 @@ nnoremap .. :bnext<CR>
 nnoremap <leader>- <C-w>s<C-w>j
 nnoremap <leader>\| <C-w>v<C-w>l
 nnoremap <leader>w <C-w>q
-nnoremap <leader>x :bd<CR>
+nnoremap <leader>x :bp \| bd # <CR>
 nnoremap <leader>n :e ~/notes.txt<CR>
 nnoremap <leader>rv :so $MYVIMRC<CR>
 nnoremap <leader>ev :e $MYVIMRC<CR>
@@ -57,8 +57,12 @@ imap <C-L> <ESC><C-L>
 nnoremap <leader>s i<space><ESC>la<space><ESC>
 " ,h to find and replace the word under the cursor
 nnoremap <leader>h *Ncw
+" run one line and send to ipython
 nmap <C-R> V<C-C><C-C><ESC>j
-imap <C-G> <esc>u
+" cancel an insert
+inoremap <C-G> <esc>u
+" remap common typo :W to :w
+cmap W w
 
 " remove whitespace
 fun! TrimWhitespace()
@@ -140,3 +144,8 @@ fu! CustomFoldText()
 endf
 
 set foldtext=CustomFoldText()
+
+
+" my grep
+command!-nargs=1 Find execute 'silent grep! -Irn --exclude *.{pyc} -e <args> .' | cwindow | execute 'redraw!'
+:nmap <leader>i :Find <c-r>=expand("<cword>")<cr><cr>
