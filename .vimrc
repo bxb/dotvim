@@ -49,7 +49,6 @@ nnoremap <leader>x :bd<CR>
 nnoremap <leader>n :e ~/notes.txt<CR>
 nnoremap <leader>rv :so $MYVIMRC<CR>
 nnoremap <leader>ev :e $MYVIMRC<CR>
-nnoremap <leader>t :%s/\s$//<CR>:w<CR>:noh<CR>
 imap <C-H> <ESC><C-H>
 imap <C-J> <ESC><C-J>
 imap <C-K> <ESC><C-K>
@@ -59,13 +58,23 @@ nnoremap <leader>s i<space><ESC>la<space><ESC>
 " ,h to find and replace the word under the cursor
 nnoremap <leader>h *Ncw
 nmap <C-R> V<C-C><C-C><ESC>j
+imap <C-G> <esc>u
+
+" remove whitespace
+fun! TrimWhitespace()
+    let l:save_cursor = getpos('.')
+    %s/\s\+$//e
+    call setpos('.', l:save_cursor)
+endfun
+
+nnoremap <leader>t :call TrimWhitespace()<CR>
 
 " select pasted section
 nnoremap gp `[v`]
 nmap ( [m
 nmap ) ]m
-nnoremap s :exec "normal i".nr2char(getchar())."\e"<CR>
-nnoremap S :exec "normal a".nr2char(getchar())."\e"<CR>
+nnoremap S :exec "normal i".nr2char(getchar())."\e"<CR>
+nnoremap s :exec "normal a".nr2char(getchar())."\e"<CR>
 inoremap jj <ESC>:w<CR>
 nmap <C-R> V<C-C><C-C>j
 nmap <C-Y> :redo 
@@ -91,6 +100,7 @@ let g:jedi#popup_select_first = 0
 map <Leader>b Oimport pdb; pdb.set_trace() # BREAKPOINT<C-c>
 
 let g:slime_target = "tmux"
+let g:slime_python_ipython = 1
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
