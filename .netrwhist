@@ -1,10 +1,5 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =8
-let g:netrw_dirhist_1='/Users/bruce/Documents/haskell/xmonad-0.1'
-let g:netrw_dirhist_2='/Users/bruce/Documents'
-let g:netrw_dirhist_3='/Users/bruce/Documents/haskell'
-let g:netrw_dirhist_4='/Users/bruce/Documents/haskell/tictac'
-let g:netrw_dirhist_5='/Users/bruce/Documents/Projects'
-let g:netrw_dirhist_6='/Users/bruce/Documents'
-let g:netrw_dirhist_7='/Users/bruce/Documents/haskell'
-let g:netrw_dirhist_8='/Users/bruce/Documents/haskell/tictac'
+let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_1='/cygdrive/c/users/bbrewington/Documents/imageryanalysis'
+let g:netrw_dirhist_2='/home/bbrewington/.ipython'
+let g:netrw_dirhist_3='/home/bbrewington/.ipython/profile_default'
