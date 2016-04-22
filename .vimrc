@@ -12,11 +12,6 @@ syntax on
 filetype plugin on
 set noswapfile
 
-" code folding
-autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
-autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
-nnoremap <space> za
-set foldlevelstart=2
 
 set autochdir
 let mapleader = ","
@@ -38,6 +33,7 @@ set scrolloff=5
 set cursorline
 set clipboard=unnamed
 set backspace=indent,eol,start
+set lazyredraw
 
 map <leader><space> :noh<CR>
 map <leader>, :bprev<CR>
@@ -46,13 +42,10 @@ nnoremap <leader>- <C-w>s<C-w>j
 nnoremap <leader>\| <C-w>v<C-w>l
 nnoremap <leader>w <C-w>q
 nnoremap <leader>x :bp \| bd # <CR>
+nnoremap <leader>q :bd <CR>
 nnoremap <leader>n :e ~/notes.txt<CR>
 nnoremap <leader>rv :so $MYVIMRC<CR>
 nnoremap <leader>ev :e $MYVIMRC<CR>
-imap <C-H> <ESC><C-H>
-imap <C-J> <ESC><C-J>
-imap <C-K> <ESC><C-K>
-imap <C-L> <ESC><C-L>
 " surround this character with spaces
 nnoremap <leader>s i<space><ESC>la<space><ESC>
 " ,h to find and replace the word under the cursor
@@ -75,12 +68,13 @@ nnoremap <leader>t :call TrimWhitespace()<CR>
 
 " select pasted section
 nnoremap gp `[v`]
+nnoremap j gj
+nnoremap k gk
 nmap ( [m
 nmap ) ]m
 nnoremap S :exec "normal i".nr2char(getchar())."\e"<CR>
 nnoremap s :exec "normal a".nr2char(getchar())."\e"<CR>
 inoremap jj <ESC>:w<CR>
-nmap <C-R> V<C-C><C-C>j
 nmap <C-Y> :redo 
 
 set laststatus=2
@@ -101,17 +95,16 @@ au FocusLost * :wa
 let g:jedi#usages_command = "<leader>z"
 let g:jedi#popup_on_dot = 0
 let g:jedi#popup_select_first = 0
+autocmd FileType python setlocal completeopt-=preview
 map <Leader>b Oimport pdb; pdb.set_trace() # BREAKPOINT<C-c>
 
+" Slime REPL
 let g:slime_target = "tmux"
 let g:slime_python_ipython = 1
+nmap <C-R> V<C-C><C-C>j
 
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_auto_loc_list = 0
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_python_checkers = ['pylint']
@@ -120,7 +113,14 @@ let g:syntastic_mode_map = {
     \ "mode": "passive"}
 nmap <leader>c :SyntasticCheck<CR>
 nmap <leader>v :SyntasticToggleMode<CR>
+nmap [l :lprevious <CR>
+nmap ]l :lnext <CR>
 
+" code folding
+autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
+autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
+nnoremap <space> za
+set foldlevelstart=2
 "custom python code folding
 fu! CustomFoldText()
     "get first non-blank line
@@ -147,5 +147,16 @@ set foldtext=CustomFoldText()
 
 
 " my grep
-command!-nargs=1 Find execute 'silent grep! -Irn --exclude *.{pyc} -e <args> .' | cwindow | execute 'redraw!'
+command!-nargs=1 Find execute 'silent grep! -Irn --exclude-dir=.git --exclude *.{pyc} -e <args> .' | cwindow | execute 'redraw!'
 :nmap <leader>i :Find <c-r>=expand("<cword>")<cr><cr>
+
+let g:AutoPairsMapCh = 0
+
+imap <C-H> <ESC><C-H>
+imap <C-J> <ESC><C-J>
+imap <C-K> <ESC><C-K>
+imap <C-L> <ESC><C-L>
+
+imap <tab> <plug>SuperTabForward
+let g:SuperTabMappingForward = '<tab>'
+let g:SuperTabLongestHighlight = 1
