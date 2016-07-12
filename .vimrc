@@ -12,6 +12,11 @@ syntax on
 filetype plugin on
 set noswapfile
 
+highlight OverLength ctermbg=darkcyan ctermfg=white guibg=#592929
+match OverLength /\%120v.\+/
+
+set relativenumber
+set number
 
 set autochdir
 let mapleader = ","
@@ -52,6 +57,7 @@ nnoremap <leader>s i<space><ESC>la<space><ESC>
 nnoremap <leader>h *Ncw
 " run one line and send to ipython
 nmap <C-R> V<C-C><C-C><ESC>j
+imap <C-R> <ESC>V<C-C><C-C><ESC>
 " cancel an insert
 inoremap <C-G> <esc>u
 " remap common typo :W to :w
@@ -87,7 +93,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'r'
-set wildignore+=*.o,*.hi,*.pyc,*.asv
+set wildignore+=*.o,*.hi,*.pyc,*.asv,*.pkl
 nnoremap <leader>p :CtrlPMixed<CR>
 au FocusLost * :wa
 
@@ -95,8 +101,9 @@ au FocusLost * :wa
 let g:jedi#usages_command = "<leader>z"
 let g:jedi#popup_on_dot = 0
 let g:jedi#popup_select_first = 0
+let g:jedi#show_call_signatures=0
 autocmd FileType python setlocal completeopt-=preview
-map <Leader>b Oimport pdb; pdb.set_trace() # BREAKPOINT<C-c>
+map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 
 " Slime REPL
 let g:slime_target = "tmux"
@@ -112,7 +119,7 @@ let g:syntastic_python_pylint_post_args = '--msg-template="{path}:{line}:{column
 let g:syntastic_mode_map = {
     \ "mode": "passive"}
 nmap <leader>c :SyntasticCheck<CR>
-nmap <leader>v :SyntasticToggleMode<CR>
+nmap <leader>v :SyntasticToggleMode<CR>:SyntasticToggleMode<CR>
 nmap [l :lprevious <CR>
 nmap ]l :lnext <CR>
 
